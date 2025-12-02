@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="stare.jfif" type="image/png">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Space</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+  font-family: 'Valorant'; /* you can name it anything */
+  src: url('Valorant Font.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body,
+body * {
+  cursor: url('mushroom.gif'), auto !important;
+}
+
+
+</style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+</style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rock+3D&display=swap');
+</style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Moirai+One&display=swap');
+</style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+</style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&display=swap');
+</style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cantata+One&display=swap');
+</style>
+  <style>
+    /* ---------- Reset + base ---------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height: 100%; }
+    body {
+      background: linear-gradient(to bottom, #f2ebe2, #f2ebe2);
+      font-family: 'Comic Neue', cursive;
+      color: #333;
+      overflow: hidden; /* scenes handle internal scrolling */
+    }
+
+    /* ---------- Top header (looks like your screenshot) ---------- */
+    .top-header {
+      width: 100%;
+  color: #b23a48;
+      background: linear-gradient(180deg, #881D1D 0%, #881D1D 100%); /* deeper pink stripe */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:86px; /* visual height like screenshot */
+      box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+    }
+    .top-header h1 {
+      font-family: 'Moirai One', sans-serif;
+      color: white;
+      font-size: 40px;
+      letter-spacing: 0.5px;
+      text-align:center;
+    }
+
+    /* nav bar below header (lighter stripe under top header) */
+    .nav-bar {
+      position:sticky;
+      width: 100%;
+      top: 0px;
+      background: linear-gradient(180deg, #CAB7A1 0%, #CAB7A1 100%);
+      border-bottom: 1px solid rgba(0,0,0,0.03);
+      display:flex;
+      justify-content:center;
+      padding: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+      z-index: 100;
+    }
+    .nav {
+      display:flex;
+      gap:22px;
+      align-items:center;
+    }
+    .nav a {
+      text-decoration:none;
+      color:#AC3834;
+      font-weight:700;
+      padding:8px 14px;
+      border-radius:14px;
+      transition: .22s;
+    }
+    .nav a.active {
+      background: #ac3a36cb;
+      color: white;
+      box-shadow: 0 4px 10px rgba(255,105,180,0.12);
+    }
+    .nav a:hover { color:#d68110; }
+
+    .nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+}
+
+.nav-gif-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-gif {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  border-radius: 6px; /* soft corners */
+}
+
+/* Optional: add spacing so gifs don’t crowd the text */
+.left-gifs {
+  margin-right: 18px;
+}
+
+.right-gifs {
+  margin-left: 18px;
+}
+
+    /* ---------- Scenes container ---------- */
+    .scenes {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 138px;          /* stays the same */
+  bottom: 0;
+  height: calc(100vh - 138px); /* fix height properly relative to viewport */
+  overflow: hidden;           /* prevent scroll from pushing past nav */
+}
+
+
+    /* Each scene is an absolute layer that can scroll internally */
+    .scene {
+  position: absolute;
+  inset: 0;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  transition: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: none;
+  overflow: auto; /* scroll happens here */
+  background: transparent;
+}
+
+.scene.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+
+    /* ---------- Page 1 styles (Home) ---------- */
+    #page1 { background: linear-gradient(to bottom right, #f2e6e2, #f2ebe2); color:#b23a48; }
+    .page-inner { width:100%; max-width:980px; margin: 14px auto; display:flex; flex-direction:column; align-items:center; gap:18px; padding-bottom:40px; }
+    #page1 h2 { font-family:'Limelight', sans-serif; color:#AC3834; font-size:2rem; }
+    .subtitle { color:#b23a48; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; }
+
+/* Polaroid Frame Style */
+.polaroid {
+  position: absolute;
+  width: 140px;
+  background: white;
+  padding: 10px 10px 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border-radius: 4px;
+  text-align: center;
+  transform: rotate(-5deg);
+  transition: transform 0.3s ease;
+}
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.polaroid img {
+  width: 100%;
+  display: block;
+  border-radius: 2px;
+  object-fit: cover;
+}
+
+.polaroid .caption {
+  font-family: "Caveat", cursive;
+  font-size: 0.7rem;
+  color: #4a2a2a;
+  margin-top: 8px;
+}
+
+
+/* 📍 Positioning */
+.polaroid.first {
+  top:70px;
+  left: 260px;
+  transform: rotate(-8deg);
+}
+
+.polaroid.second {
+  top: 140px;
+  left: 380px;
+  transform: rotate(8deg);
+}
+
+/* container for layering image on first polaroid */
+.polaroid-layer {
+  position: absolute;
+  top: 70px;
+  left: 260px;
+  width: 140px;
+  height: auto;
+}
+
+/* top overlay image */
+.overlay-img {
+  position: absolute;
+  top: 50px;       /* adjust up/down */
+  left: 260px;      /* adjust left/right */
+  width: 170px;    /* size of the overlay image */
+  pointer-events: none; /* so it won't block hovering */
+  z-index: 2;
+}
+
+/* sticker between polaroids */
+.sticker-center {
+  position: absolute;
+  top: 210px;
+  left: 270px;
+  width: 140px;  /* 🔸 change this to resize */
+  height: auto;
+  z-index: 5;
+}
+
+.sticker-center img {
+  width: 100%;        /* 🔸 makes the image follow container’s width */
+  height: auto;       /* keeps it proportional */
+  object-fit: contain;
+  display: block;     /* removes extra space below images sometimes */
+}
+
+/* 📝 Memory Text */
+.memory-text {
+  position: absolute;
+  top: 160px;
+  left: 540px;
+  width: 250px;
+  font-family: "Indie Flower", cursive;
+  color: #8b3e3e;
+  font-size: 1rem;
+  line-height: 1.1;
+}
+
+.clickme {
+  position: absolute;
+  top: 40px;
+  right: 50px;
+  width: 250px;
+  font-family: "Indie Flower", cursive;
+  color: #8b3e3e;
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+.sticker1 {
+  position: absolute;
+  top: 180px;    /* adjust to match pocket vertical center */
+  right: 240px;
+  width: 230px;
+  height: auto;
+  z-index: 10;
+}
+
+.sticker2 {
+  position: absolute;
+  top: 70px;        /* move it higher above the first sticker */
+  right: 250px;     /* same horizontal alignment as Hiro */
+  width: 200px;     /* you can adjust size separately */
+  height: auto;
+  z-index: 11;      /* higher than Hiro so it appears on top */
+  transform: rotate(-5deg); /* optional tilt for a scrapbook look */
+}
+
+/* animation keyframes */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* apply animation to stickers */
+.sticker1, .sticker2 {
+  position: absolute;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* para magkaibang galaw ng kaunti */
+.sticker2 {
+  animation-delay: 1s;
+}
+
+
+
+/* 📌 Pocket Letter Styling */
+.pocket-letter {
+  position: absolute;
+  top: 70px;       /* adjust to match player level */
+  right: 80px;      /* stays on right side */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 5;
+}
+
+.pocket {
+  width: 180px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid #d1bba1;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+}
+
+.pocket img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pocket:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+/* ✉️ Letter popup styling */
+.letter-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.letter-popup.active {
+  display: flex;
+}
+
+.letter-box {
+  background: #fffaf3;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 320px;
+  text-align: center;
+  font-family: 'Comic Neue', cursive;
+  color: #4a2a2a;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  position: relative;
+  animation: popIn 0.35s ease;
+}
+
+.close-letter {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #b23a48;
+  cursor: pointer;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+
+    
+/* --- Big vertical number aligned to right --- */
+.vertical-number {
+  position: absolute;
+  left: 60px;          /* now on the left */
+  top: 5px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  transform: scaleX(1.3);
+  transform-origin: left;
+  color: #881D1D;
+  user-select: none;
+  pointer-events: none;
+}
+
+.vertical-stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  line-height: 0.8;
+  font-size: 210px;
+  text-align: center;
+}
+
+.side-digit {
+  font-size: 210px;
+  line-height: 0.9;
+  transform: translateY(325px);
+}
+
+    /* Music player (kept intact visually) */
+  .player-wrapper { 
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
+  position: absolute;   
+  left: 450px;          
+  top: 250px;           
+}
+
+.player-row {
+display: flex;
+align-items: flex-start;
+gap: 20px;
+}
+
+.message-card {
+      width: 250px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      font-family: 'Comic Neue', cursive;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .message-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .toggle-card-btn {
+      background: #B29576;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Comic Neue', cursive;
+      font-size: 0.9rem;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .toggle-card-btn:hover {
+      background: #AC3834;
+    }
+
+    .card-content {
+      display: none;
+      padding: 10px;
+      background: #d1c5b7;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #333;
+      max-height: 200px;
+      overflow-y: auto;
+      position: relative; /* allow arrow positioning */
+    }
+
+    .card-content.open {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; max-height: 0; }
+      to { opacity: 1; max-height: 200px; }
+    }
+
+    /* Arrow now inside the sliding content */
+    .arrow {
+      position: absolute;
+      left: -15px;              /* palabas sa left */
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-right: 15px solid #AC3834;  /* <-- same color as .message-card (#fff) */
+    }
+
+.music-player { display:flex; align-items:center; gap:15px; background:#B29576; border-radius:16px; padding:15px 20px; width:420px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); font-family:'Comic Neue', cursive; }
+.music-player {
+  position: fixed;        /* keep it in place even when pages change */
+  bottom: 20px;           /* distance from the bottom */
+  left: 50%;              /* center it horizontally */
+  transform: translateX(-50%);
+  z-index: 1000;          /* make sure it stays on top of other elements */
+}
+
+
+.album-art { width:70px; height:70px; border-radius:10px; overflow:hidden; flex-shrink:0; transition:box-shadow .3s; }
+.album-art img{ width:100%; height:100%; object-fit:cover; }
+.album-art.glow { box-shadow:0 0 20px rgba(255,255,255,0.8); animation:pulse 2s infinite; }
+@keyframes pulse { 0%{box-shadow:0 0 20px rgba(255,255,255,0.8);}50%{box-shadow:0 0 30px rgba(255,255,255,1);}100%{box-shadow:0 0 20px rgba(255,255,255,0.8);} }
+.player-info { flex:1; text-align:left; }
+.player-info .song-title{ font-weight:700; margin:0; font-size:1rem; color:#fff; }
+.player-info .artist{ font-size:0.85rem; margin:2px 0 8px; color:#fceee8; }
+.progress-container{ display:flex; align-items:center; gap:6px; color:#ffffff; }
+#progress{ flex:1; -webkit-appearance:none; appearance:none; height:2px; background:#AC3834; border-radius:5px; cursor:pointer; }
+#progress::-webkit-slider-thumb{ -webkit-appearance:none; width:10px; height:10px; border-radius:50%; background:#ffffff; cursor:pointer; }
+.controls{ margin:6px 0; display:flex; align-items:center; gap:12px; color: }
+.controls button{ background:none; border:none; cursor:pointer; width:30px; height:30px; position:relative; padding:0; }
+#toggleBtn::before{ content:''; position:absolute; left:11px; top:8px; border-left:12px solid #fff; border-top:8px solid transparent; border-bottom:8px solid transparent; border-radius:2px; }
+#toggleBtn.playing::before{ content:none; }
+#toggleBtn.playing::after{ content:''; position:absolute; top:8px; left:9px; width:4px; height:16px; background:#fff; border-radius:2px; box-shadow:8px 0 0 #fff; }
+#prevBtn::before{ content:''; position:absolute; top:8px; left:8px; border-right:12px solid #fff; border-top:8px solid transparent; border-bottom:8px solid transparent; border-radius:2px; }
+#prevBtn::after{ content:''; position:absolute; top:8px; left:4px; width:3px; height:16px; background:#fff; border-radius:2px; }
+#nextBtn::before{ content:''; position:absolute; top:8px; left:12px; border-left:12px solid #fff; border-top:8px solid transparent; border-bottom:8px solid transparent; border-radius:2px; }
+#nextBtn::after{ content:''; position:absolute; top:8px; right:4px; width:3px; height:16px; background:#fff; border-radius:2px; }
+.volume-container input{ width:100%; -webkit-appearance:none; height:2px; background:#AC3834; border-radius:5px; }
+.volume-container input::-webkit-slider-thumb{ -webkit-appearance:none; width:10px; height:10px; border-radius:50%; background:#ffffff; cursor:pointer; }
+audio{ display:none; }
+
+    .message-card { width:250px; background:#fff; border-radius:16px; padding:15px; box-shadow:0 4px 10px rgba(0,0,0,0.15); position:relative; }
+
+.player-wrapper {
+  position: fixed;
+  top: 250px;      /* adjust vertical position */
+  left: 450px;     /* adjust horizontal position */
+  z-index: 20;     /* make sure it's above background elements */
+}
+
+.message-card {
+  position: fixed;
+  top: 340px;      /* same vertical alignment as player */
+  left: 900px;     /* adjust so it sits beside the player */
+  z-index: 21;
+  
+}
+
+
+
+/* ---------- PAGE 2 - Favorites (flip cards) ---------- */
+    #page2 { background: linear-gradient(to bottom right, #c04d4d, #f2ebe2); }
+    .cards-grid {
+  width: 100%;
+  max-width: 100%;
+  margin: 14px auto;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: nowrap; /* make them stay in one line */
+  padding-bottom: 20px;
+}
+
+.scroll-content {
+  max-height: 240px;  /* adjust depende sa laki ng card */
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+
+/* === FIXED FLIP CARD STYLE === */
+.flip-card {
+  perspective: 1000px;
+  width: 220px;
+  height: 280px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner,
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* FRONT SIDE — image cover */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* FRONT */
+.flip-card-front {
+  background-size: cover;
+  background-position: center;
+  transform: rotateY(0deg);
+}
+
+/* BACK — white background with your note */
+.flip-card-back {
+  background: #fff;
+  color: #333;
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Comic Neue', cursive;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 10px;
+  border: 2px solid #ffd6e0;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+ /* 🌸 Page 3 Book Layout */
+.book-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: stretch;
+  width: 100%;
+  max-width: none;
+  min-height: auto;
+  margin: 0 auto;
+  background: #f5f6fd;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  overflow: visible;
+  
+}
+
+.book-page {
+  flex: 1;
+  padding: 40px;
+  background: #fffdf9;
+  position: relative;
+}
+
+
+.page-text p {
+  margin: 0 0 1.5em 0;      /* consistent space between paragraphs */
+  line-height: 1.8;         /* book-like readability */
+  text-align: justify;      /* even text edges like printed books */
+  text-indent: 2em;         /* first line indentation */
+  color: #3b2f2f;           /* softer black for book tone */
+  padding: 0;               /* remove extra padding inside paragraph */
+}
+
+.page-text {
+  padding: 20px 10px;       /* nice inner spacing on each page */
+  font-size: 13px;
+  font-family: 'Baskervville', serif;
+}
+
+
+.page-image {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.page-text {
+  position: relative;
+  z-index: 2;
+  font-family: 'Baskervville', serif;
+  color: #3e2c2a;
+  line-height: 1.6;
+}
+
+.page-text h2 {
+  font-family: 'Cantata One', cursive;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #3e2c2a;
+}
+
+/* Stickers */
+.sticker {
+  position: absolute;
+  width: 300px;
+  opacity: 0.30;
+  z-index: 3;
+}
+
+.sticker-left {
+  bottom: 1px;
+  left: 5px;
+}
+
+.sticker-right {
+  bottom: 1px;
+  right: 5px;
+}
+
+/* Optional: subtle animation when switching */
+.scene.active .book-container {
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+  <!-- Top header (big pink stripe) -->
+  <div class="top-header">
+    <h1>Your Safe Space</h1>
+  </div>
+
+  <!-- Nav bar below header -->
+  <div class="nav-bar">
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+
+    <!-- Left side GIFs -->
+    <div class="nav-gif-group left-gifs">
+      <img src="bone.gif" alt="" class="nav-gif">
+      <img src="bone.gif" alt="" class="nav-gif">
+      <img src="bone.gif" alt="" class="nav-gif">
+    </div>
+
+    <!-- Center links -->
+    <a href="#" class="nav-item active" data-target="page1">Home</a>
+    <a href="#" class="nav-item" data-target="page2">Favorites</a>
+    <a href="#" class="nav-item" data-target="page3">Letter</a>
+
+    <!-- Right side GIFs -->
+    <div class="nav-gif-group right-gifs">
+      <img src="bone.gif" alt="" class="nav-gif">
+      <img src="bone.gif" alt="" class="nav-gif">
+      <img src="bone.gif" alt="" class="nav-gif">
+    </div>
+
+  </nav>
+</div>
+
+  <!-- Scenes (each scene scrolls internally if content longer than viewport) -->
+  <div class="scenes">
+    <!-- Page 1: Home (contains your music player intact) -->
+    <section id="page1" class="scene" aria-labelledby="home-title">
+      <div class="page-inner">
+        <h2 id="home-title">Welcome to your space!</h2>
+        <p class="subtitle">Words I always want you to remember</p>
+
+        <!-- 📸 Polaroid 1 -->
+<div class="polaroid first">
+  <img src="us1.jfif" alt="Our first meet">
+  <div class="caption">Our first meet!</div>
+</div>
+
+<!-- Image on top of Polaroid 1 -->
+  <img src="redheart.gif" alt="Overlay" class="overlay-img">
+</div>
+
+<!-- Polaroid 2 remains the same -->
+<div class="polaroid second">
+  <img src="skull.jfif" alt="Memory 2">
+  <div class="caption">I will never forget this day:( </div>
+</div>
+
+<!-- Sticker between the two polaroids -->
+<div class="sticker-center">
+  <img src="dia.gif" alt="Sticker">
+</div>
+
+
+<!-- 📝 Text below second Polaroid -->
+<p class="memory-text">
+  Hi dumdum! Welcome to ur safe space! Hehe I call this ur safe space cuz I want u to go here everytime u feeling sad, or when u miss me:> and im sorry if medj messy to hehe it’s my first time making a website, and I’m really happy that I get to work on this for u!
+</p>
+
+<p class="clickme">
+  CLICK THEM!
+</p>
+
+<!-- ✨ Hiro floating sticker -->
+<img src="omen.png" alt="Hiro Sticker" class="sticker1 float">
+
+<!-- ✨ Second sticker on top -->
+<img src="batik.png" alt="Second Sticker" class="sticker2 float">
+
+<!-- ✉️ Pocket Letter Container (Right Side) -->
+<div class="pocket-letter">
+  <div class="pocket">
+    <img src="spiral.jfif" alt="Pocket note 1">
+  </div>
+  <div class="pocket">
+    <img src="straw.jfif" alt="Pocket note 2">
+  </div>
+  <div class="pocket">
+    <img src="mofu.jfif" alt="Pocket note 3">
+  </div>
+</div>
+
+<!-- 📬 Letter Popups -->
+<div class="letter-popup" id="letter1">
+  <div class="letter-box">
+    <button class="close-letter" data-close="letter1">&times;</button>
+    <p>
+      <a href="https://www.youtube.com/watch?v=Oe37qFWdyN4" target="_blank">
+        "Watch me!"
+      </a>
+      I wanna sing this for u but ion have a good voice hehe
+    </p>
+  </div>
+</div>
+
+
+<div class="letter-popup" id="letter2">
+  <div class="letter-box">
+    <button class="close-letter" data-close="letter2">&times;</button>
+    <p>Sorry again, if this kinda messy hehe as much as I want to put interactable elements here, idk how pa hihi</p>
+  </div>
+</div>
+
+<div class="letter-popup" id="letter3">
+  <div class="letter-box">
+    <button class="close-letter" data-close="letter3">&times;</button>
+    <p>But please know that every word here is a piece of how much you mean to me.</p>
+  </div>
+</div>
+
+        
+  <!-- LEFT: Big vertical number -->
+    <div class="vertical-number">
+  <div class="vertical-stack">
+    <span>0</span>
+    <span>2</span>
+    <span>1</span>
+  </div>
+  <span class="side-digit">3</span>
+</div>
+
+        <div class="player-wrapper" style="margin-top:10px;">
+          <!-- CENTER: Music Player + Message Card -->
+          <div class="player-row">
+          <div class="music-player" aria-label="music player">
+            <div class="album-art">
+              <img src="album.jpg" alt="Album Art" id="albumImg">
+            </div>
+            <div class="player-info">
+              <p class="song-title" id="songTitle">Your Song</p>
+              <p class="artist" id="artist">Artist — Album</p>
+
+              <div class="progress-container">
+                <span id="currentTime">0:00</span>
+                <input type="range" id="progress" value="0" min="0" max="100">
+                <span id="duration">0:00</span>
+              </div>
+
+              <div class="controls">
+                <button id="prevBtn" aria-label="previous"></button>
+                <button id="toggleBtn" aria-label="play/pause"></button>
+                <button id="nextBtn" aria-label="next"></button>
+              </div>
+
+              <div class="volume-container">
+                <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+              </div>
+            </div>
+
+            <audio id="song">
+              <source src="home.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+
+          <div class="message-card">
+            <div class="arrow"></div>
+            <button class="toggle-card-btn" id="toggleCardBtn">Melodies of You</button>
+            <div class="card-content" id="cardContent" style="display:none;">
+              <p>These are the songs that remind me of you:> alam mo naman na to lahat but u can play this while reading my messages para cute hehe HAHAHAHAHAHHAHA</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 2: Favorites (flip cards with background-image support) -->
+<section id="page2" class="scene" aria-labelledby="fav-title">
+  <div style="width:100%; max-width:980px; margin:18px auto; padding:12px;">
+    <h2 id="fav-title" style="font-family:'Fredoka One',sans-serif; color:#b23a48; margin-bottom:8px;">Your Favorites 💕</h2>
+    <p style="max-width:760px; margin:0 auto 18px; color:#4a2a2a;">These are some of the things u like (well, not all of them), but they made me think of u—and I just want to appreciate them because it’s all about YOU ^____^</p>
+
+    <div class="cards-grid">
+
+      <div class="flip-card">
+        <div class="flip-card-inner">
+
+          <div class="flip-card-front" style="background-image:url('yumyum.png');"></div>
+
+          <div class="flip-card-back">
+            <div class="scroll-content">
+              <p>Just like ur favorite fruit, u’re sweet in your own special way! Every time I think of u, I always see that warm shade of yellow. It's soft and comforting, just like u:>. I’ve always liked mangoes, but I never expected that I’d end up craving them every time I start missing u. Yes, I love strawberries too, but it feels complete only when I mix them with ur favorite flavor now, just like how everything feels right when I'm with you:></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="flip-card">
+        <div class="flip-card-inner">
+
+          <div class="flip-card-front" style="background-image:url('stroke.png');"></div>
+
+          <div class="flip-card-back">
+            <div class="scroll-content">
+              <p>I’ll never get tired of admiring ur artworks, dum. Ever. That’s where my feelings for u first started. I’ll always be ur number one fan, promise hihi and every time I see your art, it brings me back to those days when I used to admire u quietly from afar hehe and now??? I get to see all ur pieces up close for free huhu I get to hype you endlessly, and even draw alongside u. I feel so lucky dum. I hope u keep creating more and more… I can’t wait to fall in love with every new artwork u make.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="flip-card">
+        <div class="flip-card-inner">
+
+          <div class="flip-card-front" style="background-image:url('smell.png');"></div>
+
+          <div class="flip-card-back">
+            <div class="scroll-content">
+              <p>When u first told me u were into perfumes, I found it rllyyy cute. I only used whatever was at home, but the way u talked about scents made me curious too. And when I finally got to smell YOUR perfume on you… waaaaaaaaaah I never wanted to stop sniffing u! U’re just so so bangooo dum hoho but honestly, my favorite perfume is whatever u’re wearing…tho ur natural skin scent will always be my number one :></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="flip-card">
+        <div class="flip-card-inner">
+
+          <div class="flip-card-front" style="background-image:url('gaming.png');"></div>
+
+          <div class="flip-card-back">
+            <div class="scroll-content">
+              <p>I’m really glad u were the one who introduced me to so many games. I honestly never thought I’d end up enjoying all these different cool worlds, but u made it fun. Thank u for sharing all of that with me. U’ve never failed to be my perfect duo after all heheh before, I could only play with u sa Genshin, but now?? I get to play with you anytimeeeee! and it makes everything feel a little more special. I can’t wait to try even more games with u, dum… it’s always better when it’s with u hihi</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="flip-card">
+        <div class="flip-card-inner">
+
+          <div class="flip-card-front" style="background-image:url('SPIDEYY.png');"></div>
+
+          <div class="flip-card-back">
+            <div class="scroll-content">
+              <p>I was never really drawn to the color of red… until I met u:> I can see how warm and tender the shade feels to u, and even with the way u see colors, u still chose it as your favorite. And that made it special to me. Because I realized how beautifully it blends with everything, the same way u fit effortlessly into my life:>> I love how u admire characters dressed in red like spidey hehe and how that shade always catches ur eyes. And now, I want you to know that for me, red has become the color of my love for you. I love you so so much dum!</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- PAGE 3 -->
+<section id="page3" class="scene">
+  <div class="book-container">
+    
+    <!-- Left Page -->
+    <div class="book-page left-page">
+      <img src="paper.jfif" alt="Left Page Background" class="page-image">
+
+      <div class="page-text">
+        <h2>Where My Soul Found Peace</h2>
+        <p>
+          Hi dum! I've been asking myself, "how did I end up loving you this much?" 
+
+          <p>Honestly, I can’t even explain it. Cuz when you feel it’s real, you just feel it, diba? Pero with you, it’s different. I didn’t just fall in love with you...</p>
+
+<p>I fell inlove with your soul, dum.</p>
+
+<p>I fell inlove with the way you think—yung mga thoughts mo na minsan ang lalim, minsan sobrang random, pero laging may meaning.</p>
+
+<p>I fell in love with how you act—yung maliliit mong galaw na minsan di mo napapansin, pero sakin, sobrang big deal.</p>
+
+<p>I fell in love with your effort—kahit sobra o simple lang, ramdam ko yung sincerity palagi.</p>
+
+<p>I fell in love with how you make me laugh—yung tawa na galing sa puso.</p>
+
+<p>I fell in love with how you make me cry—'cause you matter that much. </p>
+
+<p>I fell in love with how you open up your stories, your problems, your wins, and even your weird facts na ikaw lang nakakaalam.</p>
+
+<p>I fell in love with how you face life—calm minsan, messy minsan, but it's still you. </p>
+
+<p>I fell in love with how you handle me—my moods, my fears, my chaos.</p>
+
+<p>And most of all, i fell in love with how you express your love—kahit sa simpleng ways mo, ramdam na ramdam ko.</p>
+
+<p>Mahal kita kasi ikaw ka. And that's more than enough for me. </p>
+
+<p>You're the best example of someone extraordinary.</p>
+
+<p>But I know na you're more than that. Like im always saying, mas malaki ka pa sa universe. And if meron mang mas malaki pa sa universe, then you’re way beyond it. You're someone I can't ever EVER ever lose. As much as ayokong isipin mga negative "what ifs" sa utak ko, I can't help but think about it. Kasi if ever mawala ka sakin, parang hindi ko na kaya mag start pa ulit. It's terrifying. And i can't lose that dum. I can't lose you. Iba ka. I didn’t just fall in love with you just because you’re special. I fell in love with you because you’ve always been that way. Effortlessly you. You never had to try too hard; you just are.</p>
+
+<p>I realized I found my forever home when I noticed how my mind would randomly hum your name every time naliligaw ako sa mga deep thoughts. It’s like, even in silence, you’re always there...quietly present in the background of everything I do. Di ko rin alam bakit, but you’ve never left my mind. Not even for a moment. Maybe it’s because I truly need you in ways I can’t always explain.</p>
+
+<p>You’ve become my safe place. My home. No matter how far I wander, or how lost or confused I feel, it’s always you that I return to. Ikaw palagi yung binabalikan ko. Because with you, I don’t have to hide the parts of me that feel broken and flawed. Alam ko kasi na they’ll never be judged, but only accepted and held safely by you. And that’s the kind of love I never thought I’d find. The kind that makes me feel seen, wanted, and at peace. Kaya kahit may insecurities ako 'til now, I still find strength with you. Dahil sayo, I found more than just love. I found the one person who feels like home. And yes, that’s you. Only you.</p>
+
+<p>I want you to know that I’ll always love you. Not just for who you are today, but for every version of you na nag eexist. I can handle all of it. Your highs, your lows, your mess, and even the things that tries to drag you down. None of that scares me, dum. What truly scares me is a life without you in it. Because without you, all my hope and courage wouldn’t make sense anymore. I don’t care if sometimes you give or show me the parts of you that feel tired or lost. I’ll still choose to love you through it all. Even when things get complicated, hahakbangin natin ‘yan, dahan-dahan.</p>
+
+<p>And yes, my love for you is boundless and unconditional — it has no limits, no conditions, and walang ending. You don’t have to be perfect for me to stay. You just have to be you, Stephen. Because that’s already more than enough.</p>
+
+<p>And maybe that’s why I cry sometimes. Not out of pain, but because I never knew I could love someone this deeply. You mean more to me than words will ever be able to explain.</p>
+      
+<p>You are my peace dum.</p>
+
+<p>And I don't describe peace as something quiet, calm, or gentle just because ganun pinaparamdam mo sakin. I describe it as something messy too—something real. Yes, it's sometimes a chaos, but it's our kind of chaos. It’s about arguing until we end up laughing, crying until we feel lighter, and letting out every tangled, ugly, and honest emotion without fear of being left. Peace, to me, is knowing I can be the most unfiltered version of myself. Loud, stubborn, naughty, clingy, silly, angry, shy—and you'll still look at me like im worth choosing. Like I’m worth loving, even at my worst. My peace doesn't have to be perfect naman eh, as long as it's always alive. And that is YOU. Ikaw yung safety ko. The one I run to when everything feels too loud or too much. Yung alam kong kahit gaano kagulo, pwede ako sayo. No need to explain, no need to hold back. I can just be me...and you’ll still stay. Or at least, i hope you do—forever. :( </p>
+
+<p>I want u to know that there will be boring days, plain days, days na walang kilig. There will be times na parang paulit-ulit nalang, times na we’ll feel stuck or tired or down. Actually, dumaan na tayo jan, ilang beses na. But even in those seasons, mahal na mahal pa rin kita. I didn’t choose you just for the happy parts. I chose you dahil handa ako sa buong journey. Ups, downs, and everything in between.</p>
+
+<p>To be honest, hindi ko ramdam ung hirap kasi ang sarap ipaglaban ng pagmamahal ko sayo. Ang gaan sa puso kahit may bigat, kasi worth it ka. Worth it tayo. Yes, napapagod din tayo minsan. Tao lang. Pero i want you to know na kahit anong pagod, kahit anong lungkot, kahit ilang away pa yan. Hinding hindi ko kayang sumuko sayo. Satin. Kasi mahal kita. buong buo.</p>
+
+</div>
+
+      <img src="blackc.png" alt="Sticker Left" class="sticker sticker-left">
+    </div>
+
+    <!-- Right Page -->
+    <div class="book-page right-page">
+      <img src="paper1.jfif" alt="Right Page Background" class="page-image">
+
+      <div class="page-text">
+        <p>And dum… I’m sorry.</p>
+
+        <p>I’m sorry for the arguments, for the times I let my emotions take over, and for the moments I made you feel like my words didn’t match my actions. Alam ko naman I’ve made mistakes. Maybe not in the way you think, but through the small things that hurt without me realizing it. Alam ko din how much that affected your trust, and I can’t blame you if you’re struggling to see me the same way, even if it really hurts marinig yun sayo.</p>
+
+        <p>The past few months haven’t been easy for us. Pareho tayo na-frustrate, pareho tayo nasaktan. And whenever iniisip ko na ako yung isa sa mga reasons why you started doubting the love we built — ang sakit. Kasi ayokong maramdaman mo na hindi ka safe sakin, o na magduda ka kung totoo pa ba ako sayo. I didn't enter to this relationship to look clean. Pumasok ako dito for you to know the real me. And I'm glad you've met me in my best version. Well, not the best, but yung ako na willing mag improve palagi.</p>
+
+        <p>I know I can’t fix everything with words, especially ngayon kasi distance makes it harder. But words are all I have at the moment, and I’m giving them to you with my whole heart. Hindi ko 'to basta basta lang ginawa. Every word I say comes from the part of me that still believes in us. Alam ko naman na for you, actions speak louder than words. And you’re always right. But I want you to remember that when the distance gets in the way, my words become my actions. This is how I hold you close even from afar.</p>
+
+        <p>Wala man ako jan para yakapin ka when you feel distant, but I hope through this, you can still feel my warmth. Kasi kahit gaano kalayo, I never stopped choosing you. I never stopped trying to reach you. I never stopped believing that what we have is worth every effort, every tear, every fight.</p>
+
+        <p>I know trust isn’t easy to rebuild, but I’ll do it with patience, with honesty, and with consistency. One step at a time, I’ll earn back what we lost. And pag sinasabi ko na I’ll prove it through actions, I mean it — not with big gestures, but through small, constant ways of loving you, every single day.</p>
+
+        <p>Kahit ilang months pa lang tayo, my feelings for you are real. I know sometimes it might sound too much or too soon, but I’m serious about us. I didn’t choose you for convenience, or for the thrill. Pinili kita kasi nakikita ko yung future ko with you — with a love na raw, imperfect, but real. And I know, maybe you’ve heard words like these before, from people who once made you feel special too. Pero sana hindi mo ako i-compare sa kanila. I’m not here to repeat their promises. I’m here to prove mine. I can’t and won’t ever play with your heart, dum. That’s not who I am.</p>
+
+        <p>I just want us to go back to feeling connected again. Ayoko maramdaman mo na parang malayo ako, or na nag-iba na ako. I’m still the same person who fell in love with you in the most genuine way. I’m still the same girl who gets scared of losing you, who wants nothing but to make you feel safe and loved.</p>
+
+        <p>So please, don’t shut me out. Let me stay. Let me prove to you, slowly but surely, that I can still be the partner you used to see. Maybe even better this time. Because I’m always willing to learn and grow. Everything I do is a reflection of how deeply I love you.</p>
+
+        <p>Sometimes, I forget to tell you how thankful I really am. Thankful for the way you listen to me, for saying yes sa lahat ng requests ko even when I know you’re tired. Thank you for giving me everything I need. Not just things, but yung oras, effort, love, and care. You always put me first, even when life gets heavy, and I’ll never take that for granted.</p>
+
+        <p>Thank you for always being there for me. For standing up for me when I can’t do it myself. For making me feel safe and protected. You’ve shown me what it means to have someone who doesn’t just stay, but someone who chooses to stay. <p>
+
+        <p>I’m also really thankful kasi you never let my mistakes pass unnoticed. I know it's not good na makita mo lang lagi mga mali ko. But somehow, you always notice when I’m wrong, hindi para ipahiya ako, but to help me grow. Nakikita ko naman yun. You teach me how to fix things and how to do better. You correct me with patience, and sobrang naaappreciate ko yun.</p>
+        
+        <p>Before you, alam kong nakita mo sa sarili ko na I used to be the type who just stayed quiet even when I got hurt. I never really defended myself pag hindi ko talaga kaya. I thought being kind meant keeping everything in. But you saw that part of me. The part that was too scared to speak and too afraid to stand up. Yet, you didn’t judge me. Mas tinuruan mo pa ko lumakas. You taught me na kaya ko magsalita. Na meron akong worth. And that I deserve respect too. You made me see that it’s okay to be soft, but it’s also okay to fight for myself. You didn’t just love me. You helped me find myself again. You made me realize na I’m capable, na I’m strong, na I can be more than I ever thought I was. </p>
+
+        <p>And you’re not just my boyfriend. You’re my safe place, my comfort, and my biggest supporter. And even when it gets hard to show it, I’ll always find my way back to you. Every time.</p>
+
+        <p>Always and only you, dum.</p>
+
+        <p>I love you.</p>
+
+      </div>
+
+      <img src="whitec.png" alt="Sticker Right" class="sticker sticker-right">
+    </div>
+
+  </div>
+</section>
+
+  <!-- ---------- Scripts (music + interactions) ---------- -->
+  <script>
+    /* ---------- music player (exact logic preserved) ---------- */
+    const playlist = [
+      { title: 'Home', artist: 'Reese Lansangan', audio: 'home.mp3', art: 'home-album.jpg' },
+      { title: 'Lucky', artist: 'Crying City', audio: 'Lucky.mp3', art: 'lucky-album.jpg' },
+      { title: 'the cutest pair', artist: 'Regina Song', audio: 'thecutestpair.mp3', art: 'cutestpair-album.jpg' }
+    ];
+
+    let currentSongIndex = 0;
+    const song = document.getElementById('song');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const progress = document.getElementById('progress');
+    const volume = document.getElementById('volume');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationEl = document.getElementById('duration');
+    const albumArt = document.querySelector('.album-art');
+    const albumImg = document.getElementById('albumImg');
+    const songTitleEl = document.getElementById('songTitle');
+    const artistEl = document.getElementById('artist');
+
+    function loadSong(index) {
+      song.pause();
+      toggleBtn.classList.remove('playing');
+      albumArt.classList.remove('glow');
+      currentSongIndex = (index + playlist.length) % playlist.length;
+      const currentSong = playlist[currentSongIndex];
+      songTitleEl.textContent = currentSong.title;
+      artistEl.textContent = currentSong.artist;
+      albumImg.src = currentSong.art;
+      song.querySelector('source').src = currentSong.audio;
+      song.load();
+      progress.value = 0;
+      currentTimeEl.textContent = '0:00';
+      durationEl.textContent = '0:00';
+    }
+
+    loadSong(0);
+
+    toggleBtn.addEventListener('click', () => {
+      if (song.paused) {
+        song.play();
+        toggleBtn.classList.add('playing');
+        albumArt.classList.add('glow');
+      } else {
+        song.pause();
+        toggleBtn.classList.remove('playing');
+        albumArt.classList.remove('glow');
+      }
+    });
+
+    prevBtn.addEventListener('click', () => loadSong(currentSongIndex - 1));
+    nextBtn.addEventListener('click', () => loadSong(currentSongIndex + 1));
+
+    song.addEventListener('loadedmetadata', () => {
+      let durationMinutes = Math.floor(song.duration / 60);
+      let durationSeconds = Math.floor(song.duration % 60);
+      if (durationSeconds < 10) durationSeconds = '0' + durationSeconds;
+      durationEl.textContent = `${durationMinutes || 0}:${durationSeconds || '00'}`;
+    });
+
+    song.addEventListener('timeupdate', () => {
+      if (song.duration) {
+        progress.value = (song.currentTime / song.duration) * 100;
+        let currentMinutes = Math.floor(song.currentTime / 60);
+        let currentSeconds = Math.floor(song.currentTime % 60);
+        if (currentSeconds < 10) currentSeconds = '0' + currentSeconds;
+        currentTimeEl.textContent = `${currentMinutes}:${currentSeconds}`;
+      }
+    });
+
+    song.addEventListener('ended', () => {
+      toggleBtn.classList.remove('playing');
+      albumArt.classList.remove('glow');
+      progress.value = 0;
+      currentTimeEl.textContent = '0:00';
+    });
+
+    progress.addEventListener('input', () => {
+      if (song.duration) song.currentTime = (progress.value / 100) * song.duration;
+    });
+
+    volume.addEventListener('input', () => song.volume = volume.value);
+
+    /* ---------- interactions ---------- */
+    // message card toggle
+    document.getElementById('toggleCardBtn').addEventListener('click', () => {
+      const cardContent = document.getElementById('cardContent');
+      cardContent.classList.toggle('open');
+      if (cardContent.classList.contains('open')) cardContent.style.display = 'block';
+      else cardContent.style.display = 'none';
+    });
+
+    // flip cards
+    document.querySelectorAll('.flip-card').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('flipped'));
+    });
+
+    /* ---------- scene navigation (fade-like switching) ---------- */
+    const navItems = document.querySelectorAll('.nav-item');
+    const scenes = document.querySelectorAll('.scene');
+
+    function showScene(id) {
+      scenes.forEach(s => {
+        if (s.id === id) {
+          s.classList.add('active');
+          s.scrollTop = 0; // reset scroll within scene
+        } else {
+          s.classList.remove('active');
+        }
+      });
+      navItems.forEach(a => a.classList.toggle('active', a.dataset.target === id));
+      history.replaceState(null, '', '#' + id);
+    }
+
+    navItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = item.dataset.target;
+        showScene(target);
+      });
+    });
+
+    // On load, deep-link to hash if present
+    const initialHash = location.hash.replace('#','');
+    if (initialHash && document.getElementById(initialHash)) showScene(initialHash);
+    else showScene('page1');
+
+    // optional keyboard nav
+    document.addEventListener('keydown', (e)=> {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        const ids = Array.from(scenes).map(s=>s.id);
+        const current = ids.findIndex(id=>document.getElementById(id).classList.contains('active'));
+        if (current === -1) return;
+        let nextIndex = current;
+        if (e.key === 'ArrowLeft') nextIndex = Math.max(0, current-1);
+        if (e.key === 'ArrowRight') nextIndex = Math.min(ids.length-1, current+1);
+        showScene(ids[nextIndex]);
+      }
+    });
+  </script>
+  <script>
+  // Link pockets to their popups
+  const pockets = document.querySelectorAll('.pocket');
+  const letters = ['letter1', 'letter2', 'letter3'];
+
+  pockets.forEach((pocket, index) => {
+    pocket.addEventListener('click', () => {
+      document.getElementById(letters[index]).classList.add('active');
+    });
+  });
+
+  // Close buttons
+  document.querySelectorAll('.close-letter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-close');
+      document.getElementById(target).classList.remove('active');
+    });
+  });
+
+  // Click outside letter box to close
+  document.querySelectorAll('.letter-popup').forEach(popup => {
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) popup.classList.remove('active');
+    });
+  });
+</script>
+</body>
+</html>
